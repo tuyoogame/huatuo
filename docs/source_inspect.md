@@ -13,13 +13,13 @@ huatuo是基于unity il2cpp运行时的扩展。为了将il2cpp由AOT扩展为AO
 目录结构上，与之对应：
 
 - huatuo 自身源码
-    - interpter 解释器模块
-    - metadata 元数据解析与注册模块
-    - transform 指令集转换模块
+  - interpreter 解释器模块
+  - metadata 元数据解析与注册模块
+  - transform 指令集转换模块
 - 对il2cpp源码的修改
 
     huatuo对il2cpp源码修改主要为支持动态注册元数据。大多数地方只是插入了hook处理，并未修改原始实现。例如:
-    
+
 ```cpp
 const char* il2cpp::vm::GlobalMetadata::GetStringFromIndex(StringIndex index)
 {
@@ -36,19 +36,26 @@ const char* il2cpp::vm::GlobalMetadata::GetStringFromIndex(StringIndex index)
 }
 ```
 
-
 huatuo大约只改动了几百行这种简单的hook代码。后续迁移和维护到新的il2cpp版本是比较简单的事情。
 
 ## 调试
-
 
 huatuo解释器核心工作包括两部分：
 
 - 指令集转换。将基于栈的IL指令转换为基于寄存器的版本。在 huatuo/transform/transform.cpp 的 HiTransform::Transform函数。
 - 寄存器指令的解释执行。在 huatuo/interpreter/interpreter_Execute.cpp的 Interpreter::Execute函数。
 
-
 只要断点到这两个函数，就很容易逐步跟踪IL函数的转换转换到解决执行的整个流程。
+
+### 创建测试工程
+
+- 准备 Unity 2020.3.7 版本。根据你的平台必须同时安装相应的il2cpp模块。
+- Project Settings 设置
+  - Scripting Backend 为 IL2Cpp
+  - Api Compatible Level 为 .Net 4.x
+  - C++ Compiler Configuration 为 Debug
+- Building Settings 。选中 "Create VisualStudio Solution"，发布完即包含一个源码工程，可供测试。
+- Build完成后，即产生一个可调试的工程
 
 ### transform 实现简介
 
@@ -63,4 +70,3 @@ huatuo解释器核心工作包括两部分：
 比较直接。就是解释执行指令。huatuo已经实现了解释器栈的复用。脚本函数的嵌套调用不需要发生解释器函数的嵌套，另外也省去了参数栈的多次复制，大幅优化了调用成本（调用AOT函数则无法规避这个成本）。
 
 异常机制和函数的嵌套调用，大家自己看源码吧。暂时不多解释了。
-
