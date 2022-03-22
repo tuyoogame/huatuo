@@ -41,7 +41,7 @@ huatuo从mono的[Hybrid mode execution](https://developpaper.com/new-net-interpr
 
 ![icon](docs/images/architecture.png)
 
-更具体地说，huatuo做了一下几点工作：
+更具体地说，huatuo做了以下几点工作：
 
 - 实现了一个高效的元数据(dll)解析库
 - 改造了il2cpp的元数据管理模块，实现了元数据的动态注册
