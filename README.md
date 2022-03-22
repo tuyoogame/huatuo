@@ -15,7 +15,7 @@
 
 // **=== huatuo 将于 2022.3.23（明天） 发布，敬请期待 ===**。迫不急待的同学，请先体验 [**试用项目**](https://github.com/focus-creative-games/huatuo_trial)
 
-// 想第一时间得知发布消息，请加 QQ群: 651188171（huatuo c#热更新 开发交流群）。明天群里还有大波红包噢~
+// 想第一时间得知发布消息，请加 QQ群: 651188171（huatuo c#热更新 开发交流群）。
 
  //
 
@@ -53,7 +53,7 @@ huatuo从mono的[Hybrid mode execution](https://developpaper.com/new-net-interpr
 ## 文档
 
 - [wiki](docs/home.md)
-- 快速上手 [文档](docs/start_up.md)、[视频](docs/start_up.md)
+- [快速上手](docs/start_up.md)
 - [FAQ](docs/FAQ.md)
 - [示例项目](https://github.com/focus-creative-games/huatuo_demo)
 - [知乎专栏](https://www.zhihu.com/column/c_1489549396035870720)
