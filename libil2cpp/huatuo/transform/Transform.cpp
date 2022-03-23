@@ -10,7 +10,7 @@
 #include "../metadata/MetadataUtil.h"
 #include "../metadata/Opcodes.h"
 #include "../interpreter/Instruction.h"
-#include "../interpreter/interpreter.h"
+#include "../interpreter/Interpreter.h"
 #include "../interpreter/InterpreterModule.h"
 
 using namespace huatuo::metadata;
@@ -2693,7 +2693,7 @@ ip++;
 				uint32_t methodDataIndex = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, shareMethod);
 				Managed2NativeCallMethod managed2NativeMethod = InterpreterModule::GetManaged2NativeMethodPointer(shareMethod, false);
 				IL2CPP_ASSERT(managed2NativeMethod);
-				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, managed2NativeMethod);
+				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, (void*)managed2NativeMethod);
 
 				int32_t argIdxDataIndex;
 				uint16_t* __argIdxs;
@@ -2796,7 +2796,7 @@ ip++;
 				uint32_t methodDataIndex = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, shareMethod);
 				Managed2NativeCallMethod managed2NativeMethod = InterpreterModule::GetManaged2NativeMethodPointer(shareMethod, false);
 				IL2CPP_ASSERT(managed2NativeMethod);
-				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, managed2NativeMethod);
+				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, (void*)managed2NativeMethod);
 
 
 				int32_t needDataSlotNum = (resolvedTotalArgdNum + 3) / 4;
@@ -2900,7 +2900,7 @@ ip++;
 				//uint32_t methodDataIndex = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, shareMethod);
 				Managed2NativeCallMethod managed2NativeMethod = InterpreterModule::GetManaged2NativeMethodPointer(methodSig);
 				IL2CPP_ASSERT(managed2NativeMethod);
-				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, managed2NativeMethod);
+				uint32_t managed2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, (void*)managed2NativeMethod);
 
 
 				int32_t resolvedTotalArgdNum = methodSig.paramCount;
@@ -4108,7 +4108,7 @@ ip++;
 				PushStackByType(&klass->byval_arg);
 				CreateAddIR(ir, NewClassVar);
 				ir->type = shareMethod->klass->valuetype ? HiOpcodeEnum::NewValueTypeVar : HiOpcodeEnum::NewClassVar;
-				ir->managed2NativeMethod = managed2NativeMethod;
+				ir->managed2NativeMethod = (void*)managed2NativeMethod;
 				ir->method = const_cast<MethodInfo*>(shareMethod);
 				ir->argIdxs = argIdxDataIndex;
 				ir->obj = objIdx;

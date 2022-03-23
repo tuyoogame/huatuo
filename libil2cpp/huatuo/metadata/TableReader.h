@@ -35,7 +35,7 @@ namespace metadata
         Tb##name __r = {};
 
 #define __F(fieldName) const ColumnOffsetSize& col_##fieldName = rowSchema[__fieldIndex++]; \
-        __r.##fieldName = ReadColumn(image, rowPtr, col_##fieldName);
+        __r.fieldName = ReadColumn(image, rowPtr, col_##fieldName);
 
 #define TABLE_END return __r; \
         }

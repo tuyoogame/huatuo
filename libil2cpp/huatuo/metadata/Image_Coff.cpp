@@ -239,7 +239,7 @@ namespace metadata
 				_tables[i] = { curTableData, metaDataRowSize, rowNum, true, sorted };
 				curTableData += metaDataRowSize * rowNum;
 				//std::cout << "table:" << i << " ," << curValidTableIndex << ", row_size:" << metaDataRowSize << ", row_num:" << rowNum << std::endl;
-				printf("table:[%d][%d] offset:%0llx row_size:%d row_count:%d\n", i, curValidTableIndex, offset, metaDataRowSize, rowNum);
+				//printf("table:[%d][%d] offset:%0llx row_size:%d row_count:%d\n", i, curValidTableIndex, offset, metaDataRowSize, rowNum);
 				++curValidTableIndex;
 			}
 			else

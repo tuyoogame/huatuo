@@ -690,8 +690,10 @@ namespace metadata
 				}
 				// TODO 可以考虑优化一下,将 signature在前一步存到暂时不用的 returnType里
 				TbMethod methodData = TableReader::ReadMethod(*this, rawMethodStart + m + 1);
+
+				BlobReader methodSigReader = GetBlobReaderByRawIndex(methodData.signature);
 				MetadataParser::ReadMethodDefSig(
-					GetBlobReaderByRawIndex(methodData.signature),
+					methodSigReader,
 					GetGenericContainerByTypeDefinition(&typeDef),
 					GetGenericContainerByRawIndex(DecodeMetadataIndex(md.genericContainerIndex)),
 					md,

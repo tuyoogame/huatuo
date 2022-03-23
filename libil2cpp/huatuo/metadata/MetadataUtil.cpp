@@ -150,6 +150,7 @@ namespace metadata
 			}
 			break;
 		}
+		default: return true;
 		}
 		return true;
 	}
