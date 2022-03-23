@@ -22,14 +22,31 @@ namespace interpreter
 {
 	il2cpp::os::ThreadLocalValue InterpreterModule::s_machineState;
 
-	struct CStringHash {
-		size_t operator()(const char* _Keyval) const noexcept {
-			return std::_Hash_array_representation(_Keyval, std::strlen(_Keyval)); // map -0 to 0
+	struct CStringHash 
+	{
+		size_t operator()(const char* s) const noexcept
+		{
+			uint32_t hash = 0;
+
+			for (; *s; ++s)
+			{
+				hash += *s;
+				hash += (hash << 10);
+				hash ^= (hash >> 6);
+			}
+
+			hash += (hash << 3);
+			hash ^= (hash >> 11);
+			hash += (hash << 15);
+
+			return hash;
 		}
 	};
 
-	struct CStringEqualTo {
-		bool operator()(const char* _Left, const char* _Right) const {
+	struct CStringEqualTo
+	{
+		bool operator()(const char* _Left, const char* _Right) const
+		{
 			return std::strcmp(_Left, _Right) == 0;
 		}
 	};
