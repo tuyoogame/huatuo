@@ -41,7 +41,8 @@ huatuo从mono的[Hybrid mode execution](https://developpaper.com/new-net-interpr
 - [wiki](docs/home.md)
 - [快速上手](docs/start_up.md)
 - [FAQ](docs/FAQ.md)
-- [示例项目](https://github.com/focus-creative-games/huatuo_demo)
+- [常见错误](docs/common_errors.md)
+- [示例项目](https://github.com/focus-creative-games/huatuo_trial)
 - [知乎专栏](https://www.zhihu.com/column/c_1489549396035870720)
 - 支持与联系
   - QQ群: 651188171（huatuo c#热更新 开发交流群）

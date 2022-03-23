@@ -52,7 +52,6 @@ huatuo解释器核心工作包括两部分：
 - 准备 Unity 2020.3.7 版本。根据你的平台必须同时安装相应的il2cpp模块。
 - Project Settings 设置
   - Scripting Backend 为 IL2Cpp
-  - Api Compatible Level 为 .Net 4.x
   - C++ Compiler Configuration 为 Debug
 - Building Settings 。选中 "Create VisualStudio Solution"，发布完即包含一个源码工程，可供测试。
 - Build完成后，即产生一个可调试的工程

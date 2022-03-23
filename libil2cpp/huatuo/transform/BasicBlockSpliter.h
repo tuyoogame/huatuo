@@ -23,8 +23,8 @@ namespace transform
 		const metadata::MethodBody& _body;
 		std::set<uint32_t> _splitOffsets;
 
-		void BasicBlockSpliter::SplitNormal(const byte* ilcodeStart, uint32_t codeSize, std::unordered_set<uint32_t>& ilOffsets);
-		void BasicBlockSpliter::SplitExceptionHandles(const byte* ilcodeStart, uint32_t codeSize, const std::vector<metadata::ExceptionClause>& exceptionClauses);
+		void SplitNormal(const byte* ilcodeStart, uint32_t codeSize, std::unordered_set<uint32_t>& ilOffsets);
+		void SplitExceptionHandles(const byte* ilcodeStart, uint32_t codeSize, const std::vector<metadata::ExceptionClause>& exceptionClauses);
 	};
 }
 }

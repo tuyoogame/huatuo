@@ -2403,6 +2403,7 @@ ip++;
 				uint32_t token = (uint32_t)GetI4LittleEndian(ip + 1);
 				ip += 5;
 				shareMethod = const_cast<MethodInfo*>(image->GetMethodInfoFromToken(token, klassContainer, methodContainer, genericContext));
+				IL2CPP_ASSERT(shareMethod);
 			}
 
 		LabelCall:

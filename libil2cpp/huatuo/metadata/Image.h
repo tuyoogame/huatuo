@@ -12,7 +12,7 @@
 #include "Coff.h"
 #include "Tables.h"
 #include "MetadataParser.h"
-#include "VTableSetUp.h"
+#include "VTableSetup.h"
 #include "MetadataUtil.h"
 
 

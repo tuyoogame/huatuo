@@ -11,7 +11,7 @@
 
 #include "interpreter/InterpreterModule.h"
 #include "metadata/MetadataModule.h"
-#include "transform/transform.h"
+#include "transform/Transform.h"
 
 using namespace il2cpp;
 
