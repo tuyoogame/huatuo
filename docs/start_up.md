@@ -84,7 +84,7 @@ public class LoadDll : MonoBehaviour
     - Scripting Backend 选择 il2cpp backend
     - Api Compatible level 选择 .NET 4.x
     - 取消 use incremental GC
-  - 发布
+  - 发布(Windows平台注意切换成64位)
   - 进入场景后，应该能看到日志 "hello,huatuo"
 
 - 测试热更新
