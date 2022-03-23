@@ -8,20 +8,6 @@
 
 <br/>
 
-///////////////////////////////////////////// ///////////////////////////////////////////// /////////////
-
-//
-
-// **=== huatuo will be released on 2022.3.23 (tomorrow), stay tuned ===**. Students who can't wait, please experience [**trial project**](https://github.com/focus-creative-games/huatuo_trial)
-
-// If you want to know the release news as soon as possible, please add QQ group: 651188171 (huatuo c# hot update development exchange group). There will be a big wave of red envelopes in the group tomorrow~
-
- //
-
-///////////////////////////////////////////// ///////////////////////////////////////////// /////////////
-
-<br/>
-
 Huatuo is a near-perfect C# hot update solution with complete features, zero cost, high performance, and low memory.
 
 huatuo provides a very complete cross-platform CLR runtime, which can be efficiently executed in **AOT+interpreter** mixed mode not only on Android platform, but also on IOS, Consoles and other platforms that restrict JIT.
