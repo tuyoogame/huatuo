@@ -1143,7 +1143,7 @@ ip++;
 		{
 			uint32_t newIndex = (uint32_t)resolvedDatas.size();
 			resolvedDatas.push_back(ptr);
-			ptr2Index.insert_or_assign(ptr, newIndex);
+			ptr2Index.insert({ ptr, newIndex });
 			return newIndex;
 		}
 	}

@@ -64,7 +64,7 @@ namespace interpreter
 			{
 				break;
 			}
-			s_calls.insert_or_assign(method.signature, method);
+			s_calls.insert({ method.signature, method });
 		}
 
 		for (size_t i = 0; ; i++)
@@ -74,7 +74,7 @@ namespace interpreter
 			{
 				break;
 			}
-			s_invokes.insert_or_assign(method.signature, method);
+			s_invokes.insert({ method.signature, method });
 		}
 	}
 
@@ -129,7 +129,7 @@ namespace interpreter
 				}
 				else
 				{
-					pos += std::sprintf(sigBuf + pos, "s%lld", (klass->instance_size - sizeof(Il2CppObject) + 7) / 8);
+					pos += std::sprintf(sigBuf + pos, "s%d", (int)((klass->instance_size - sizeof(Il2CppObject) + 7) / 8));
 				}
 			}
 			else
@@ -145,7 +145,7 @@ namespace interpreter
 				Il2CppClass* klass = il2cpp::vm::Class::FromIl2CppType(type);
 				if (klass->valuetype && klass->instance_size > sizeof(Il2CppObject) + 8)
 				{
-					pos += std::sprintf(sigBuf + pos, "s%lld", (klass->instance_size - sizeof(Il2CppObject) + 7) / 8);
+					pos += std::sprintf(sigBuf + pos, "s%d", (int)(klass->instance_size - sizeof(Il2CppObject) + 7) / 8);
 				}
 				else
 				{

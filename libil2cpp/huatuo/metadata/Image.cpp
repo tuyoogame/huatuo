@@ -4,7 +4,6 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
-#include <memory_resource>
 
 #include "il2cpp-class-internals.h"
 #include "vm/GlobalMetadata.h"
@@ -1040,7 +1039,7 @@ namespace metadata
 		// FIXME free resultType
 		{
 			il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
-			_token2ResolvedDataCache.insert_or_assign(key, (void*)klass);
+			_token2ResolvedDataCache.insert({ key, (void*)klass });
 		}
 		return klass;
 	}
@@ -1186,7 +1185,7 @@ namespace metadata
 
 		{
 			il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
-			_token2ResolvedDataCache.insert_or_assign(key, (void*)method);
+			_token2ResolvedDataCache.insert({ key, (void*)method });
 		}
 		return method;
 	}
@@ -1223,7 +1222,7 @@ namespace metadata
 		const FieldInfo* fieldInfo = GetFieldInfoFromFieldRef(*this, *resultType, fri.field);
 		{
 			il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
-			_token2ResolvedDataCache.insert_or_assign(key, (void*)fieldInfo);
+			_token2ResolvedDataCache.insert({ key, (void*)fieldInfo });
 		}
 		return fieldInfo;
 	}

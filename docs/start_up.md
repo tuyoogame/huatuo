@@ -19,9 +19,9 @@
 
 - 使用 Unity的 Assembly def 创建一个专门的 HotFix 模块（你也可以使用创建第三方工程的方式，只不过麻烦了点）。
 - 配置HotFix模块
-  - 根据需求设置正确的Assembly Definition Reference
-  - Platforms 选项下，取消AnyFlatform，接着只选中 Editor和随便一个**不导出**的平台（如XboxOne）。不能只有Editor，因为Unity会把它当作纯Editor模板，不允许加载Monobehaviour。
-- 将示例项目Main下的 RefTypes.cs 拷贝到 你项目中（非必须，纯粹是为了防止unity裁剪，如果你已经正确设置了link.xml，则可忽略这步）
+  - 根据需求设置正确的Assembly Definition Reference。起码得引用主工程吧。
+  - Platforms 选项下，取消AnyPlatform，接着只选中 Editor和随便一个**不导出**的平台（如XboxOne）。不能只有Editor，因为Unity会把它当作纯Editor模板，不允许加载MonoBehaviour。
+- 将示例项目Assets/Main/HuatuoLib 以及Assets/link.xml 拷贝到 你项目中（非必须，纯粹是为了防止unity裁剪，如果你已经正确设置了link.xml，则可忽略这步）
 
 ### 代码中使用
 
