@@ -26,7 +26,7 @@ struct MyVector2
 
 先说一下现在的缓解后的限制。 以List&lt;T&gt; 举例。你可以创建出AOT中使用过的任何List的实例化类型。 你可以对脚本中的任意自定义枚举MyHotUpdateEnum使用 List&lt;MyHotUpdateEnum&gt;。 你可以对于任意的class类型C，使用List&lt;C&gt;。
 
-il2cpp为此引入一个概念叫**泛型代码共享** [Generic Sharing](https://blog.unity.com/technology/il2cpp-internals-generic-sharing-implementation),此技术更早则源于mono。CLR中也有同样的概念，CLR认为所有引用类型实参都一样，所以可以代码共享，例如，为List&lt;String&gt;方法编译的代码可以直接用于List&lt;Streamglt;方法，这是因为所有引用类型实参/变量只是指向托管堆的一个8字节指针（这里假设64位系统），但是对于值类型，则必须每种类型都进行代码生成，因为值类型大小不定
+il2cpp为此引入一个概念叫**泛型代码共享** [Generic Sharing](https://blog.unity.com/technology/il2cpp-internals-generic-sharing-implementation),此技术更早则源于mono。CLR中也有同样的概念，CLR认为所有引用类型实参都一样，所以可以代码共享，例如，为List&lt;String&gt;方法编译的代码可以直接用于List&lt;Stream&gt;方法，这是因为所有引用类型实参/变量只是指向托管堆的一个8字节指针（这里假设64位系统），但是对于值类型，则必须每种类型都进行代码生成，因为值类型大小不定
 
 il2cpp为了避免泛型代码膨胀，节约内存，在保证代码逻辑正确性的情况下对于一些能够共享代码(什么情况下能够共享?：因为值类型内存大小不定，所以无法共享)，只生成一份代码。
 
