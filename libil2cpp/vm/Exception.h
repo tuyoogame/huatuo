@@ -85,7 +85,7 @@ namespace vm
         static Il2CppException* GetFileLoadException(const char* msg);
         static Il2CppException* GetFileNotFoundException(const utils::StringView<Il2CppChar>& msg);
         // ==={{ huatuo
-        static Il2CppException* Exception::GetStackOverflowException(const char* msg);
+        static Il2CppException* GetStackOverflowException(const char* msg);
         // ===}} huatuo
         static Il2CppException* GetMaxmimumNestedGenericsException();
 
