@@ -2869,7 +2869,7 @@ ip++;
 
 					Managed2NativeCallMethod staticManaged2NativeMethod = InterpreterModule::GetManaged2NativeMethodPointer(shareMethod, true);
 					IL2CPP_ASSERT(staticManaged2NativeMethod);
-					uint32_t staticManaged2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, staticManaged2NativeMethod);
+					uint32_t staticManaged2NativeMethodDataIdx = GetOrAddResolveDataIndex(ptr2DataIdxs, resolveDatas, (void*)staticManaged2NativeMethod);
 					if (retIdx < 0)
 					{
 						CreateAddIR(ir, CallDelegate_void);

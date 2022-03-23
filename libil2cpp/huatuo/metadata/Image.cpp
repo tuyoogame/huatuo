@@ -598,8 +598,9 @@ namespace metadata
 					if (methodHeader->localVarSigToken)
 					{
 						TbStandAloneSig sigData = TableReader::ReadStandAloneSig(*this, DecodeTokenRowIndex(methodHeader->localVarSigToken));
-
-						MetadataParser::ReadLocalVarSig(GetBlobReaderByRawIndex(sigData.signature),
+                        
+                        BlobReader reader = GetBlobReaderByRawIndex(sigData.signature);
+						MetadataParser::ReadLocalVarSig(reader,
 							GetGenericContainerByTypeDefIndex(DecodeMetadataIndex(md.declaringType)),
 							GetGenericContainerByRawIndex(DecodeMetadataIndex(md.genericContainerIndex)),
 							body.localVars, body.localVarCount);
