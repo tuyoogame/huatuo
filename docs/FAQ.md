@@ -36,7 +36,7 @@ il2cpp支持的平台都支持
 
 完整支持，无任何限制。
 
-## 支持热更新MonoBehavour吗？
+## 支持热更新MonoBehaviour吗？
 
 支持。但由于unity资源管理的问题，只能手动go.AddComponent&lt;T&gt;添加。 如果能解决unity资源加载的 guid问题（比如允许动态更新这些信息），则可以彻底解决。
 
@@ -51,6 +51,10 @@ il2cpp支持的平台都支持
 ## 支持async task吗？
 
 支持。但只支持 返回原生类型或者class类型。 如 Task&lt;int&gt;， Task&lt;YourHotUpdateClassType&gt;
+
+## 支持多Assembly吗？
+
+支持。但是不会自动加载依赖dll。需要你手动按依赖顺序加载热更dll。
 
 ## 支持IEnumerator吗?
 
