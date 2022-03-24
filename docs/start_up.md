@@ -2,7 +2,7 @@
 
 当前仅支持 2020.3.7f版本(后续很快会支持2018以后的全系列版本)。
 
-可参考 [示例项目](https://github.com/focus-creative-games/huatuo_trial)。
+可参考 [示例项目](https://github.com/focus-creative-games/huatuo_trial)  [huatuo尝鲜视频教程](https://www.bilibili.com/video/BV1QL411w7z2/)
 
 ## 使用
 
