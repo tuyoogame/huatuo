@@ -88,9 +88,11 @@ namespace vm
 
         static const Il2CppAssembly* GetAssemblyByName(const char* nameToFind);
 
-        // === huatuo
+        // ==={{ huatuo
         static const Il2CppAssembly* LoadAssemblyByName(const char* assemblyPath);
-        // === huatuo
+        static const Il2CppAssembly* GetOrLoadAssemblyByName(const char* assemblyNameOrPath, bool tryLoad);
+        static const Il2CppAssembly* LoadAssemblyByBytes(const char* assemblyBytes, size_t length);
+        // ===}} huatuo
 
         static Il2CppClass* GetTypeInfoFromType(const Il2CppType* type);
 

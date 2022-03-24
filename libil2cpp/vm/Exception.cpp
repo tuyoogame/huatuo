@@ -607,7 +607,12 @@ namespace vm
     // ==={{ huatuo
     Il2CppException* Exception::GetStackOverflowException(const char* msg)
     {
-        return FromNameMsg(Image::GetCorlib(), "System", "StackOverflowException ", msg);
+        return FromNameMsg(Image::GetCorlib(), "System", "StackOverflowException", msg);
+    }
+
+    Il2CppException* Exception::GetBadImageFormatException(const char* msg)
+    {
+        return FromNameMsg(Image::GetCorlib(), "System", "BadImageFormatException", msg);
     }
     // ===}} huatuo
 

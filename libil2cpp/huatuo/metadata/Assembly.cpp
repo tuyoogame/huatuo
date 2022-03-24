@@ -60,7 +60,7 @@ namespace metadata
         return true;
     }
 
-    Il2CppAssembly* Assembly::LoadFrom(const char* assemblyFile)
+    Il2CppAssembly* Assembly::LoadFromFile(const char* assemblyFile)
     {
         void* fileBuffer;
         uint64_t fileLength;
@@ -69,14 +69,23 @@ namespace metadata
             return nullptr;
         }
 
-        const char* assemblyName = huatuo::GetAssemblyNameFromPath(assemblyFile);
-        auto ass = Create(assemblyFile, assemblyName, (const byte*)fileBuffer, fileLength);
+        return LoadFromBytes((const byte*)fileBuffer, fileLength);
+    }
+
+    Il2CppAssembly* Assembly::LoadFromBytes(const void* assemblyData, uint64_t length)
+    {
+        auto ass = Create((const byte*)assemblyData, length);
         vm::Assembly::Register(ass);
         return ass;
     }
 
-    Il2CppAssembly* Assembly::Create(const char* assemblyFile, const char* assemblyName, const byte* assemblyData, uint64_t length)
+    Il2CppAssembly* Assembly::Create(const byte* assemblyData, uint64_t length)
     {
+        if (!assemblyData)
+        {
+            il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetArgumentNullException("rawAssembly is null"));
+        }
+
         uint32_t imageId = MetadataModule::AllocImageIndex();
         if (imageId > kMaxLoadImageCount)
         {
@@ -89,8 +98,9 @@ namespace metadata
         if (err != LoadImageErrorCode::OK)
         {
             char errMsg[300];
-            int strLen = snprintf(errMsg, 100, "bad image. file:%s err:%d", assemblyFile, (int)err);
-            vm::Exception::Raise(vm::Exception::GetArgumentException("bad image", errMsg));
+            int strLen = snprintf(errMsg, sizeof(errMsg), "err:%d", (int)err);
+            vm::Exception::Raise(vm::Exception::GetBadImageFormatException(errMsg));
+            // when load a bad image, mean a fatal error. we don't clean image on purpose.
         }
 
         auto ass = new Il2CppAssembly{};

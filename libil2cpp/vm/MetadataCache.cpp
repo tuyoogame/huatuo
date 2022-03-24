@@ -860,9 +860,14 @@ const Il2CppAssembly* il2cpp::vm::MetadataCache::GetAssemblyFromIndex(AssemblyIn
     return s_AssembliesTable + index;
 }
 
-// ==huatuo== begin
+const Il2CppAssembly* il2cpp::vm::MetadataCache::GetAssemblyByName(const char* nameToFind)
+{
+    return GetOrLoadAssemblyByName(nameToFind, false);
+}
 
-static const Il2CppAssembly* GetOrLoadAssemblyByName(const char* assemblyNameOrPath, bool tryLoad)
+// ==={{ huatuo
+
+const Il2CppAssembly* il2cpp::vm::MetadataCache::GetOrLoadAssemblyByName(const char* assemblyNameOrPath, bool tryLoad)
 {
     const char* assemblyName = huatuo::GetAssemblyNameFromPath(assemblyNameOrPath);
 
@@ -886,7 +891,7 @@ static const Il2CppAssembly* GetOrLoadAssemblyByName(const char* assemblyNameOrP
 
     if (tryLoad)
     {
-        Il2CppAssembly* newAssembly = huatuo::metadata::Assembly::LoadFrom(assemblyNameOrPath);
+        Il2CppAssembly* newAssembly = huatuo::metadata::Assembly::LoadFromFile(assemblyNameOrPath);
         if (newAssembly)
         {
             il2cpp::vm::Assembly::Register(newAssembly);
@@ -897,19 +902,26 @@ static const Il2CppAssembly* GetOrLoadAssemblyByName(const char* assemblyNameOrP
 
     return nullptr;
 }
-// ==huatuo== end
 
-const Il2CppAssembly* il2cpp::vm::MetadataCache::GetAssemblyByName(const char* nameToFind)
+const Il2CppAssembly* il2cpp::vm::MetadataCache::LoadAssemblyByBytes(const char* assemblyBytes, size_t length)
 {
-    return GetOrLoadAssemblyByName(nameToFind, false);
+    il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
+
+    Il2CppAssembly* newAssembly = huatuo::metadata::Assembly::LoadFromBytes(assemblyBytes, length);
+    if (newAssembly)
+    {
+        il2cpp::vm::Assembly::Register(newAssembly);
+        s_cliAssemblies.push_back(newAssembly);
+        return newAssembly;
+    }
+
+    return nullptr;
 }
 
-// === huatuo
 const Il2CppAssembly* il2cpp::vm::MetadataCache::LoadAssemblyByName(const char* nameToFind)
 {
     return GetOrLoadAssemblyByName(nameToFind, true);
 }
-
 
 const Il2CppGenericMethod* il2cpp::vm::MetadataCache::FindGenericMethod(std::function<bool(const Il2CppGenericMethod*)> predic)
 {
@@ -922,7 +934,8 @@ const Il2CppGenericMethod* il2cpp::vm::MetadataCache::FindGenericMethod(std::fun
     }
     return nullptr;
 }
-// === huatuo
+
+// ===}} huatuo
 
 Il2CppImage* il2cpp::vm::MetadataCache::GetImageFromIndex(ImageIndex index)
 {

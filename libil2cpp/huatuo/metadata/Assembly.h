@@ -10,10 +10,12 @@ namespace metadata
     class Assembly
     {
     public:
-        static Il2CppAssembly* LoadFrom(const char* assemblyFile);
+        static Il2CppAssembly* LoadFromFile(const char* assemblyFile);
+
+        static Il2CppAssembly* LoadFromBytes(const void* assemblyData, uint64_t length);
 
     private:
-        static Il2CppAssembly* Create(const char* assemblyFile, const char* assemblyName, const byte* assemblyData, uint64_t length);
+        static Il2CppAssembly* Create(const byte* assemblyData, uint64_t length);
     };
 }
 }
