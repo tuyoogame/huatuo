@@ -190,7 +190,8 @@ namespace System
         {
             il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetArgumentNullException("rawAssembly is null"));
         }
-        const Il2CppAssembly* assembly = huatuo::metadata::Assembly::LoadFromBytes(il2cpp::vm::Array::GetFirstElementAddress(rawAssembly), il2cpp::vm::Array::GetByteLength(rawAssembly));
+        const Il2CppAssembly* assembly = il2cpp::vm::MetadataCache::LoadAssemblyFromBytes(il2cpp::vm::Array::GetFirstElementAddress(rawAssembly),
+            il2cpp::vm::Array::GetByteLength(rawAssembly));
         return vm::Reflection::GetAssemblyObject(assembly);
     }
     // ===}} huatuo

@@ -69,17 +69,17 @@ namespace metadata
             return nullptr;
         }
 
-        return LoadFromBytes((const byte*)fileBuffer, fileLength);
+        return LoadFromBytes((const byte*)fileBuffer, fileLength, false);
     }
 
-    Il2CppAssembly* Assembly::LoadFromBytes(const void* assemblyData, uint64_t length)
+    Il2CppAssembly* Assembly::LoadFromBytes(const void* assemblyData, uint64_t length, bool copyData)
     {
-        auto ass = Create((const byte*)assemblyData, length);
+        auto ass = Create((const byte*)assemblyData, length, copyData);
         vm::Assembly::Register(ass);
         return ass;
     }
 
-    Il2CppAssembly* Assembly::Create(const byte* assemblyData, uint64_t length)
+    Il2CppAssembly* Assembly::Create(const byte* assemblyData, uint64_t length, bool copyData)
     {
         if (!assemblyData)
         {
@@ -92,11 +92,22 @@ namespace metadata
             vm::Exception::Raise(vm::Exception::GetArgumentException("exceed max image index", ""));
         }
         Image* image = new Image(imageId);
+        
+        if (copyData)
+        {
+            byte* newAssebmlyData = (byte*)IL2CPP_MALLOC(length);
+            std::memcpy(newAssebmlyData, assemblyData, length);
+            assemblyData = newAssebmlyData;
+        }
         LoadImageErrorCode err = image->Load(assemblyData, (size_t)length);
 
 
         if (err != LoadImageErrorCode::OK)
         {
+            if (copyData)
+            {
+                IL2CPP_FREE((void*)assemblyData);
+            }
             char errMsg[300];
             int strLen = snprintf(errMsg, sizeof(errMsg), "err:%d", (int)err);
             vm::Exception::Raise(vm::Exception::GetBadImageFormatException(errMsg));
