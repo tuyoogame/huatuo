@@ -60,14 +60,6 @@ namespace metadata
         return true;
     }
 
-    const char* copyString(const char* src)
-    {
-        size_t len = std::strlen(src);
-        char* dst = (char*)IL2CPP_MALLOC(len + 1);
-        std::strcpy(dst, src);
-        return dst;
-    }
-
     Il2CppAssembly* Assembly::LoadFrom(const char* assemblyFile)
     {
         void* fileBuffer;
@@ -100,19 +92,21 @@ namespace metadata
             int strLen = snprintf(errMsg, 100, "bad image. file:%s err:%d", assemblyFile, (int)err);
             vm::Exception::Raise(vm::Exception::GetArgumentException("bad image", errMsg));
         }
-        auto ass = new Il2CppAssembly{};
 
+        auto ass = new Il2CppAssembly{};
         auto image2 = new Il2CppImage{};
-        image2->name = copyString(assemblyName);
-        image2->nameNoExt = copyString(assemblyName);
-        image2->assembly = ass;
 
         image->InitBasic(image2);
-        image->BuildIl2CppImage(image2);
         image->BuildIl2CppAssembly(ass);
+        ass->image = image2;
+
+        image->BuildIl2CppImage(image2);
+        image2->name = concatNewString(ass->aname.name, ".dll");
+        image2->nameNoExt = ass->aname.name;
+        image2->assembly = ass;
+
         image->InitRuntimeMetadatas();
 
-        ass->image = image2;
         return ass;
     }
 

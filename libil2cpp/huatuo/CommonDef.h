@@ -15,6 +15,10 @@ namespace huatuo
     void LogPanic(const char* errMsg);
 
     const char* GetAssemblyNameFromPath(const char* assPath);
+
+    const char* copyString(const char* src);
+
+    const char* concatNewString(const char* s1, const char* s2);
 }
 
 
