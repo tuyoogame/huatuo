@@ -45,7 +45,11 @@ namespace System
         static mscorlib_System_AppDomain * InternalSetDomainByID(int32_t domain_id);
         static void InternalUnload(int32_t domain_id);
         static Il2CppReflectionAssembly* LoadAssembly(Il2CppAppDomain* ad, Il2CppString* assemblyRef, struct mscorlib_System_Security_Policy_Evidence* evidence, bool refOnly);
-        static Il2CppAssembly* LoadAssemblyRaw(Il2CppAppDomain* self, Il2CppArray* rawAssembly, Il2CppArray* rawSymbolStore, void* /* System.Security.Policy.Evidence */ securityEvidence, bool refonly);
+        // ==={{ huatuo
+        // il2cpp bug! should return Il2CppReflectionAssembly*
+        //static Il2CppAssembly* LoadAssemblyRaw(Il2CppAppDomain* self, Il2CppArray* rawAssembly, Il2CppArray* rawSymbolStore, void* /* System.Security.Policy.Evidence */ securityEvidence, bool refonly);
+        static Il2CppReflectionAssembly* LoadAssemblyRaw(Il2CppAppDomain* self, Il2CppArray* rawAssembly, Il2CppArray* rawSymbolStore, void* /* System.Security.Policy.Evidence */ securityEvidence, bool refonly);
+        // ===}} huatuo
         static void SetData(Il2CppAppDomain* self, Il2CppString* name, Il2CppObject* data);
         static Il2CppAppDomain* createDomain(Il2CppString*, mscorlib_System_AppDomainSetup*);
         static Il2CppString * getFriendlyName(Il2CppAppDomain* ad);

@@ -232,6 +232,13 @@ namespace metadata
 
     bool IsMatchMethodSig(const Il2CppMethodDefinition* methodDef, const MethodRefSig& resolveSig, const Il2CppGenericContainer* klassGenericContainer, uint32_t genericArgCount);
     bool IsMatchMethodSig(const MethodInfo* methodDef, const MethodRefSig& resolveSig, const Il2CppGenericContainer* klassGenericContainer, uint32_t genericArgCount);
+
+    inline Il2CppType* CloneIl2CppType(const Il2CppType* type)
+    {
+        Il2CppType* newType = (Il2CppType*)IL2CPP_MALLOC(sizeof(Il2CppType));
+        *newType = *type;
+        return newType;
+    }
 #pragma endregion
 
 

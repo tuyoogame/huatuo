@@ -22,35 +22,6 @@ namespace interpreter
 {
 	il2cpp::os::ThreadLocalValue InterpreterModule::s_machineState;
 
-	struct CStringHash 
-	{
-		size_t operator()(const char* s) const noexcept
-		{
-			uint32_t hash = 0;
-
-			for (; *s; ++s)
-			{
-				hash += *s;
-				hash += (hash << 10);
-				hash ^= (hash >> 6);
-			}
-
-			hash += (hash << 3);
-			hash ^= (hash >> 11);
-			hash += (hash << 15);
-
-			return hash;
-		}
-	};
-
-	struct CStringEqualTo
-	{
-		bool operator()(const char* _Left, const char* _Right) const
-		{
-			return std::strcmp(_Left, _Right) == 0;
-		}
-	};
-
 	static std::unordered_map<const char*, NativeCallMethod, CStringHash, CStringEqualTo> s_calls;
 	static std::unordered_map<const char*, NativeInvokeMethod, CStringHash, CStringEqualTo> s_invokes;
 

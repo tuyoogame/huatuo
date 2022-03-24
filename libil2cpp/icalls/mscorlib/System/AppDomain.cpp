@@ -32,6 +32,10 @@
 #include <string>
 #include <vector>
 
+// ==={{ huatuo
+#include "huatuo/metadata/Assembly.h"
+// ===}} huatuo
+
 namespace il2cpp
 {
 namespace icalls
@@ -161,9 +165,9 @@ namespace System
         //il2cpp does not pack multiple assemblies with the same name, and even if that one is not the exact one that is asked for,
         //it's more useful to return it than not to. (like cases where you want to Deserialize a BinaryFormatter blob that was serialized
         //on 4.0)
-        // === huatuo
+        // ==={{ huatuo
         const Il2CppAssembly* assembly = vm::Assembly::Load(info.assembly_name().name.c_str());
-        // === huatuo 
+        // ===}} huatuo 
         if (assembly != NULL)
             return vm::Reflection::GetAssemblyObject(assembly);
 
@@ -177,12 +181,19 @@ namespace System
         return 0;
     }
 
-    Il2CppAssembly* AppDomain::LoadAssemblyRaw(Il2CppAppDomain* self, Il2CppArray* rawAssembly, Il2CppArray* rawSymbolStore, void* /* System.Security.Policy.Evidence */ securityEvidence, bool refonly)
+    // ==={{ huatuo
+    Il2CppReflectionAssembly* AppDomain::LoadAssemblyRaw(Il2CppAppDomain* self, Il2CppArray* rawAssembly, Il2CppArray* rawSymbolStore, void* /* System.Security.Policy.Evidence */ securityEvidence, bool refonly)
     {
-        NOT_SUPPORTED_IL2CPP(AppDomain::LoadAssemblyRaw, "This icall is not supported by il2cpp.");
-
-        return 0;
+        //NOT_SUPPORTED_IL2CPP(AppDomain::LoadAssemblyRaw, "This icall is not supported by il2cpp.");
+        // return 0;
+        if (!rawAssembly)
+        {
+            il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetArgumentNullException("rawAssembly is null"));
+        }
+        const Il2CppAssembly* assembly = huatuo::metadata::Assembly::LoadFromBytes(il2cpp::vm::Array::GetFirstElementAddress(rawAssembly), il2cpp::vm::Array::GetByteLength(rawAssembly));
+        return vm::Reflection::GetAssemblyObject(assembly);
     }
+    // ===}} huatuo
 
     bool AppDomain::InternalIsFinalizingForUnload(int32_t domain_id)
     {

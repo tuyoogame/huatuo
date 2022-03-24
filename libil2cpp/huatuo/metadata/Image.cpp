@@ -1039,6 +1039,10 @@ namespace metadata
 		MetadataParser::ReadTypeFromToken(*this, klassGenericContainer, methodGenericContainer, DecodeTokenTableType(token), DecodeTokenRowIndex(token), originType);
 		const Il2CppType* resultType = genericContext != nullptr ? il2cpp::metadata::GenericMetadata::InflateIfNeeded(&originType, genericContext, true) : &originType;
 		Il2CppClass* klass = il2cpp::vm::Class::FromIl2CppType(resultType);
+		if (!klass)
+		{
+			il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetTypeLoadException());
+		}
 		// FIXME free resultType
 		{
 			il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
@@ -1047,13 +1051,32 @@ namespace metadata
 		return klass;
 	}
 
+
+	inline void ThrowMethodNotFindException(const Il2CppType* type, const char* methodName)
+	{
+		if (!type)
+		{
+			il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetTypeLoadException("type not exists"));
+		}
+		Il2CppClass* klass = il2cpp::vm::Class::FromIl2CppType(type);
+		if (!klass)
+		{
+			il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetTypeLoadException("type not exists"));
+		}
+		
+		char errMsg[100];
+		std::snprintf(errMsg, sizeof(errMsg), "%s.%s::%s", il2cpp::vm::Class::GetNamespace(klass), il2cpp::vm::Class::GetName(klass), methodName);
+
+		il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetMissingMethodException(errMsg));
+	}
+
 	const MethodInfo* GetMethodInfo(const Il2CppType* containerType, const Il2CppMethodDefinition* methodDef, const Il2CppGenericInst* instantiation, const Il2CppGenericContext* genericContext)
 	{
 		const Il2CppType* finalContainerType = TryInflateIfNeed(containerType, genericContext, true);
 		const MethodInfo* method = GetMethodInfoFromMethodDef(containerType, methodDef);
+		IL2CPP_ASSERT(method);
 		// final genericContext = finalContainerType.class_inst + mri.instantiation
 		if (instantiation)
-
 		{
 			const Il2CppGenericInst* finalClassIns = finalContainerType->type == IL2CPP_TYPE_GENERICINST ? finalContainerType->data.generic_class->context.class_inst : nullptr;
 			const Il2CppGenericInst* finalMethodIns = instantiation;
@@ -1095,6 +1118,7 @@ namespace metadata
 				}
 			}
 		}
+		ThrowMethodNotFindException(type, resolveMethodName);
 		return nullptr;
 	}
 
@@ -1186,6 +1210,12 @@ namespace metadata
 		//	method = il2cpp::metadata::GenericMetadata::Inflate(method, &finalGenericContext);
 		//}
 
+		if (!method)
+		{
+			char errMsg[100];
+			std::snprintf(errMsg, sizeof(errMsg), "method missing. token:%u", token);
+			il2cpp::vm::Exception::Raise(il2cpp::vm::Exception::GetMissingMethodException(errMsg));
+		}
 		{
 			il2cpp::os::FastAutoLock lock(&il2cpp::vm::g_MetadataLock);
 			_token2ResolvedDataCache.insert({ key, (void*)method });
