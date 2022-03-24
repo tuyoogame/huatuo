@@ -40,6 +40,10 @@ public class App
 
 - 主工程中，使用标准反射函数加载Hotfix.dll,以示例 LoadDll.cs 为例
 
+  > 新增的案例中LoadDll.cs文件已提交了简单的ab加载流程.
+  >
+  > 同时也在菜单中添加了简单hotfix.dll文件的ab制作工具
+
 ```c#
 
 public class LoadDll : MonoBehaviour
