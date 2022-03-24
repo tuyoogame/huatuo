@@ -45,7 +45,7 @@ namespace interpreter
 			case LocationDataType::U8:
 			{
 				dst->i64 = *(int64_t*)src;
-				argOffset += 2;
+				++argOffset;
 				break;
 			}
 			case LocationDataType::S_16:
