@@ -67,7 +67,6 @@ huatuo是原生的c#热更新方案。通俗地说，il2cpp相当于mono的aot�
 - [FAQ](https://xxx/huatuo/faq/)
 - [限制和注意事项](https://xxx/huatuo/performance/limit/)
 - [示例项目](https://github.com/focus-creative-games/huatuo_trial)
-- [知乎专栏](https://www.zhihu.com/column/c_1489549396035870720)
 - [==>致谢名单<==](https://xxx/huatuo/donate/)
 
 ## 稳定性状况

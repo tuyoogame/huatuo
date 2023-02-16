@@ -43,7 +43,6 @@ More specifically, huatuo does the following:
 - [Best Practices](https://xxx.github.io/huatuo/start_up/best_practices/)
 - [Source Structure and Trace Debugging](https://xxx.github.io/huatuo/source_inspect/)
 - [Sample Project](https://github.com/xxx/huatuo_trial)
-- [Know the column] (https://www.zhihu.com/column/c_1489549396035870720)
 - [==>Acknowledgments<==](https://xxx.github.io/huatuo/donate/)
 
 ## Stability status
