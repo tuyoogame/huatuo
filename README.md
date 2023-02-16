@@ -80,18 +80,6 @@ huatuo是原生的c#热更新方案。通俗地说，il2cpp相当于mono的aot�
 - 测试了游戏常用库和框架的兼容性，兼容性良好。只要能在il2cpp backend下工作的库都可以在huatuo下正常工作。甚至那些与il2cpp因为AOT问题不兼容的库，现在因为huatuo对il2cpp的能力扩充，反而可以正常运行了。具体参见 [兼容性报告](https://focus-creative-games.github.io/huatuo/performance/compatible/)
 - 已经有几十个大中型游戏项目较完整地接入huatuo，并且其中一些在紧锣密鼓作上线前测试。具体参见收集的一些 [完整接入的商业项目列表](https://focus-creative-games.github.io/huatuo/ref_project/)
 
-## 支持与联系
-
-- 开发交流，欢迎加QQ群或邮件联系
-  - QQ群：651188171 huatuo技术交流群 **(官方主群)**。可以反馈bug，但**不要在群里咨询基础使用问题**。
-  - QQ群：428404198 huatuo使用疑难咨询群 **(新手群)**。新手使用过程中遇到问题，都可以在群里咨询。
-  - 邮箱：taojingjian#gmail.com
-
-- 商务合作，请联系Lucas Zhang
-  - 电话：15201249045
-  - 微信：lucaszhang1993
-  - 邮箱：zhangshuo@tuyoogame.com
-
 ## RoadMap
 
 huatuo虽然与il2cpp相关，但绝大多数核心代码独立于il2cpp，很容易移植（预计一个月）到其他不支持AOT+Interpreter的CLR平台。无论unity如何版本变迁，哪怕废弃了il2cpp改用.net 6+，huatuo会持续跟进，稳定地提供跨平台的CLR热更新服务，直至某天.net官方直接支持AOT+Interpreter，则huatuo完成其历史使命。
